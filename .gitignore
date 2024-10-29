@@ -1,0 +1,11 @@
+# Ignore all .DS_Store files everywhere
+**/.DS_Store
+
+# Ignore all .idea directories everywhere
+**/.idea/
+
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup

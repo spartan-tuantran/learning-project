@@ -1,0 +1,57 @@
+<configuration>
+  <appender name="STACK_TRACE_LOG" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+        <maxDepthPerThrowable>20</maxDepthPerThrowable>
+        <maxLength>2048</maxLength>
+        <shortenedClassNameLength>20</shortenedClassNameLength>
+        <exclude>sun\.reflect\..*\.invoke.*</exclude>
+        <exclude>net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+        <exclude>reactor\.</exclude>
+        <rootCauseFirst>true</rootCauseFirst>
+        <inlineHash>true</inlineHash>
+      </throwableConverter>
+    </encoder>
+  </appender>
+
+  <appender name="FILE_LOG" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_FILE}</file>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+        <maxDepthPerThrowable>20</maxDepthPerThrowable>
+        <maxLength>2048</maxLength>
+        <shortenedClassNameLength>20</shortenedClassNameLength>
+        <exclude>sun\.reflect\..*\.invoke.*</exclude>
+        <exclude>net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+        <exclude>reactor\.</exclude>
+        <rootCauseFirst>true</rootCauseFirst>
+        <inlineHash>true</inlineHash>
+      </throwableConverter>
+    </encoder>
+  </appender>
+
+  <appender name="COLORFUL_LOG" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>false</withJansi>
+    <encoder>
+      <pattern>%cyan(%d{HH:mm:ss.SSS}) %red([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <root level="${LOGGING_LEVEL:-INFO}">
+    <if condition='property("MICRONAUT_ENVIRONMENTS").contains("local")'>
+      <then>
+        <appender-ref ref="COLORFUL_LOG"/>
+      </then>
+      <else>
+        <appender-ref ref="STACK_TRACE_LOG"/>
+      </else>
+    </if>
+    <if condition='isDefined("LOG_FILE")'>
+      <appender-ref ref="FILE_LOG"/>
+    </if>
+  </root>
+
+  <logger name="io.micronaut.context" level="INFO"/>
+  <logger name="io.micronaut.http" level="INFO"/>
+</configuration>

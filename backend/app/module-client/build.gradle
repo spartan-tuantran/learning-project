@@ -1,0 +1,28 @@
+plugins {
+  alias(libs.plugins.ksp)
+}
+
+dependencies {
+  implementation(project(":core:module-retrofit"))
+  implementation(project(":core:module-jackson"))
+  implementation(project(":core:module-utility"))
+  implementation(project(":core:module-database"))
+  implementation project(":app:module-postgresql")
+
+  implementation(libs.kotlinx.coroutines.core)
+
+  implementation(mn.micronaut.validation)
+  implementation(mn.micronaut.security.jwt)
+  ksp(mn.micronaut.inject.kotlin)
+  ksp(mn.micronaut.validation.processor)
+  ksp(mn.micronaut.http.validation)
+
+  implementation(libs.jackson.databind)
+  implementation(libs.jackson.core)
+
+  implementation(libs.arrow.core)
+
+  implementation(libs.networking.retrofit)
+  testImplementation(libs.networking.okhttp.logging)
+  testImplementation(libs.networking.okhttp)
+}

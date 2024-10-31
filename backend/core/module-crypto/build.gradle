@@ -1,0 +1,6 @@
+dependencies {
+  implementation(libs.crypto.spongycastle.core)
+  implementation(libs.crypto.snappy.java)
+  implementation(libs.crypto.jbcrypt)
+  implementation(libs.apache.common.lang3)
+}

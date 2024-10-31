@@ -1,0 +1,71 @@
+micronaut:
+  server:
+    port: 8080
+    idle-timeout: 10m
+    read-idle-timeout: 10m
+    write-idle-timeout: 10m
+    cors:
+      enabled: true
+      configurations:
+        web:
+          allowedMethods:
+            - GET
+            - OPTIONS
+            - POST
+            - PUT
+            - DELETE
+            - PATCH
+          allowedOrigins:
+            - ${ALLOWED_ORIGIN:`http://localhost:8080`}
+
+  application:
+    name: backend
+
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: "${JWT_GENERATOR_SIGNATURE_SECRET:c2VjdXJlLXNlY3JldC1rZXktMTIzITIzNEFBQGxvbmdyYW5kb21zdHJpbmctdGhhdC1pcy1kaWZmaWN1bHQtdG8tZ3Vlc3M=}"
+        generator:
+          refresh-token:
+            secret: "${JWT_GENERATOR_SIGNATURE_SECRET:c2VjdXJlLXNlY3JldC1rZXktMTIzITIzNEFBQGxvbmdyYW5kb21zdHJpbmctdGhhdC1pcy1kaWZmaWN1bHQtdG8tZ3Vlc3M=}"
+      generator:
+        access-token:
+          expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:3600}
+  http:
+    client:
+      log-level: TRACE
+
+  executors:
+    io:
+      type: fixed
+      nThreads: 128
+
+  netty:
+    default:
+      allocator:
+        max-order: 3
+
+logger:
+  levels:
+    com.alext: INFO
+    io.micronaut: INFO
+
+app:
+  database:
+    url: ${DB_URL:localhost}
+    replicaUrl: ${DB_REPLICA_URL:localhost}
+    name: ${DB_NAME:local}
+    username: ${DB_USERNAME:local}
+    password: ${DB_PASSWORD:local}
+    prepareThreshold: 0
+    replicaTimeoutSeconds: 10
+    primaryTimeoutSeconds: 5
+    portNumber: ${DB_PORT:5432}
+    pool:
+      primaryMaxPoolSize: ${DB_PRIMARY_MAX_POOL_SIZE:30}
+      replicaMaxPoolSize: ${DB_REPLICA_MAX_POOL_SIZE:30}
+  refreshTokenExpiration: ${REFRESH_TOKEN_EXPIRATION:604800}

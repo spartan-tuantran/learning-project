@@ -8,7 +8,7 @@ class Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-      Micronaut
+      Micronautr
         .build(*args)
         .mainClass(Main::class.java)
         .eagerInitSingletons(true)

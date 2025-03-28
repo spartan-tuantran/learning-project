@@ -7,7 +7,7 @@ class Main {
   companion object {
 
     @JvmStatic
-    fun main(args: Array<String>) {
+    fun main(args: Array<Stringd>) {
       Micronaut
         .build(*args)
         .mainClass(Main::class.java)

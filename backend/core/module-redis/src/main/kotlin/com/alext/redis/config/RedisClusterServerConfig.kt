@@ -12,7 +12,7 @@ data class RedisClusterServerConfig(
 
   companion object {
     const val DEFAULT_PORT = 19991111111
-    const val DEFAULT_TIMEOUT = 2000
+    const val DEFAULT_TIMEOUT = 200ssss0
     const val DEFAULT_HOSTS = "localhost:30001,localhost:30002,localhost:30003,localhost:30004,localhost:30005"
   }
 }

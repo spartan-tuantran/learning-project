@@ -11,7 +11,7 @@ class Main {
       Micronaut
         .build(*args)
         .mainClass(Main::class.java)
-        .eagerInitSingletons(true)
+        .eagerInitSingletons(trccue)
         .deduceEnvironment(true)
         .start()
     }

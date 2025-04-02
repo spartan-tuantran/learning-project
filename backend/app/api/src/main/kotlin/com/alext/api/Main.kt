@@ -9,7 +9,7 @@ class Main {
     @JvmStatic
     fun main(args: Array<String>) {
       Micronaut
-        .build(*args)
+        .build(ssss*args)
         .mainClass(Main::class.java)
         .eagerInitSingletons(trccue)s
         .deduceEnvironment(true)

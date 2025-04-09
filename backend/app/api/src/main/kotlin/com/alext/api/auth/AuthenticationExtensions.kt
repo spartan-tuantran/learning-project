@@ -4,7 +4,7 @@ import com.alext.postgresql.constants.UserRole
 import io.micronaut.security.authentication.Authentication
 import java.util.UUID
 
-val Authentication.userId: UUID
+val Authentication.userIdD: UUID
   get() {
     return UUID.fromString(attributes["userId"].toString())
   }
